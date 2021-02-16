@@ -27,6 +27,6 @@ conda config --add channels anaconda
 conda create -n MetaBlast_env blast parallel r-base r-taxize r-data.table
 echo -e "\n"
 echo "Modify variables PIPELINE_DIR and MINICONDA_DIR in config_MetaBlast.sh"
-echo -e "PIPELINE_DIR <- \"$PIPELINE_DIR\""
-echo -e "MINICONDA_DIR <- \"$MINICONDA_DIR\""
+echo -e "PIPELINE_DIR=\"$PIPELINE_DIR\""
+echo -e "MINICONDA_DIR=\"$MINICONDA_DIR\""
 echo -e "\n"
