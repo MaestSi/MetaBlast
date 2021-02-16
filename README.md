@@ -70,6 +70,20 @@ Outputs:
 * \<sample_name\>\_blast\_hits\_unique\_min\_id\_perc\_$MIN\_ID\_PERC\_min\_query\_cov\_$MIN\_QUERY\_COV.txt: file containing top Blast hit for each read
 * \<sample_name\>\_summary\_blast\_hits\_unique\_min\_id\_perc\_$MIN\_ID\_PERC\_min\_query\_cov\_$MIN\_QUERY\_COV.txt: file containing summary of top Blast hits with full taxonomy
 
+**Collapse_taxa.sh**
+
+Usage:
+./Collapse_taxa.sh \<sample_name\>\_summary\_blast\_hits.txt \<taxonomic level\>
+
+Inputs:
+
+* \<sample_name\>\_summary\_blast\_hits.txt: file produced by **MetaBlast.sh**
+* \<taxonomic level\>: number indicating the column of the input file representing the desired taxonomic level
+
+Output
+
+* \<sample_name\>\_summary\_blast\_hits_merged_level\<taxonomic level\>.txt: summary file collapsed at the desired taxonomic level
+
 ## Auxiliary scripts
 
 In the following, auxiliary scripts run by **MetaBlast.sh** are listed. These scripts should not be called directly.
