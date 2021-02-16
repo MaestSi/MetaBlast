@@ -59,7 +59,7 @@ Then, you can open the **config_MetaBlast.sh** file with a text editor and set t
 Usage:
 ./MetaBlast.sh -f \<sample\_name.fasta\> -db \<blast_db\>
 
-Note: modify **config_MetaBlast.sh** before running.
+Note: modify **config_MetaBlast.sh** before running; it can be run in background with nohup <command> &
 
 Inputs:
 
