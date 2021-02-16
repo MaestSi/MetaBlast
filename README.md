@@ -1,6 +1,6 @@
 # MetaBlast
 
-**MetaBlast** is a Metagenomics pipeline for parallel Blast analysis and report generation. After splitting the fasta file in chunks, it Blasts each read and then reports up to one top hit for each read. A simple summary file is then generated, reporting the number of reads supporting each top hit. Moreover, the full taxonomy of each top hit is retrieved.
+**MetaBlast** is a Metagenomic pipeline for parallel Blast analysis and report generation. After splitting the fasta file in chunks, it Blasts each read and then reports up to one top hit for each read. A simple summary file is then generated, reporting the number of reads supporting each top hit. Moreover, the full taxonomy of each top hit is retrieved.
 
 <p align="center">
   <img src="Figures/MetaBlast.png" alt="drawing" width="400" title="MetaBlast_pipeline">
