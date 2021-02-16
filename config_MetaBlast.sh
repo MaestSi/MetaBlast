@@ -26,7 +26,7 @@ min_query_cov=90
 max_evalue=0.00001
 #number of threads
 threads=24
-#chunk_size is the number of reads contained in each file
+#chunk_size is the number of rows contained in each split fasta file
 chunk_size=100
 ########################################################################################################
 PIPELINE_DIR="/path/to/MetaBlast"
