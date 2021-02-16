@@ -22,8 +22,8 @@
 min_id_perc=85
 #minumum percent query coverage [0, 100]
 min_query_cov=90
-#minimum e-value
-min_evalue=0.00001
+#maximum e-value
+max_evalue=0.00001
 #number of threads
 threads=24
 #chunk_size is the number of reads contained in each file

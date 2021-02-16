@@ -67,7 +67,7 @@ parallel_blast=$working_dir"/parallel_blast_"$sample_name".sh"
 parallel_filtering=$working_dir"/parallel_filtering_"$sample_name".sh"
 
 for f in $(find $working_dir -maxdepth 1 | grep $sample_name".chunk"); do
-  echo "$BLAST -db $blast_db -query $f -num_threads $blast_threads -outfmt \"6 qseqid sgi salltitles length pident qcovs evalue bitscore\" -evalue $min_evalue > $working_dir"/"$(basename $f)_blast_hits.txt" >> $parallel_blast
+  echo "$BLAST -db $blast_db -query $f -num_threads $blast_threads -outfmt \"6 qseqid sgi salltitles length pident qcovs evalue bitscore\" -evalue $max_evalue > $working_dir"/"$(basename $f)_blast_hits.txt" >> $parallel_blast
 done
 parallel -j $threads < $parallel_blast
 
