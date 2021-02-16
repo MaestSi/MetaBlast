@@ -84,7 +84,7 @@ Note: script run by **MetaBlast.sh** for filtering Blast results, retaining up t
 
 **Retrieve_taxonomy.R**
 
-Note: script run by **MetaBlast.sh** for retrieve the full taxonomy for each top hit.
+Note: script run by **MetaBlast.sh** to retrieve the full taxonomy for each top hit.
 
 
 ## Citations
