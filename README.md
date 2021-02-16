@@ -69,3 +69,27 @@ Inputs:
 Outputs:
 * \<sample_name\>\_blast\_hits\_unique\_min\_id\_perc\_$MIN\_ID\_PERC\_min\_query\_cov\_$MIN\_QUERY\_COV.txt: file containing top Blast hit for each read
 * \<sample_name\>\_summary\_blast\_hits\_unique\_min\_id\_perc\_$MIN\_ID\_PERC\_min\_query\_cov\_$MIN\_QUERY\_COV.txt: file containing summary of top Blast hits with full taxonomy
+
+## Auxiliary scripts
+
+In the following, auxiliary scripts run by **MetaBlast.sh** are listed. These scripts should not be called directly.
+
+**config_MetaBlast.sh**
+Note: configuration script, should be edited before running **MetaBlast.sh**.
+
+**Filter_Blast_hits.R**
+Note: script run by **MetaBlast.sh** for filtering Blast results, retaining up to 1 top hit for each read.
+
+**Retrieve_taxonomy.R**
+Note: script run by **MetaBlast.sh** for retrieve the full taxonomy for each top hit.
+
+
+## Citations
+
+Please refer to the following manuscripts for further information.
+
+O. Tange (2011): GNU Parallel - The Command-Line Power Tool;login: The USENIX Magazine, February 2011:42-47.
+
+Altschul, S.F., Gish, W., Miller, W., Myers, E.W. & Lipman, D.J. (1990) "Basic local alignment search tool." J. Mol. Biol. 215:403-410.
+
+Scott Chamberlain, Eduard Szocs (2013). “taxize - taxonomic search and retrieval in R.” F1000Research.
