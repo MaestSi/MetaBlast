@@ -21,8 +21,8 @@
 INPUT_FILE=$1
 TAXA_COL=$2
 
-OUTPUT_FILE=$(echo $(basename $INPUT_FILE) | sed 's/\.txt/_merged/')"_level_"$TAXA_COL".txt"
-echo -e "Num. reads\tTaxa merged" > $OUTPUT_FILE
+OUTPUT_FILE=$(echo $(basename $INPUT_FILE) | sed 's/\.txt/_collapsed/')"_level_"$TAXA_COL".txt"
+echo -e "Num. reads\tCollapsed taxa" > $OUTPUT_FILE
 taxa_tmp=$(cat $INPUT_FILE | tail -n+2 | cut -f $TAXA_COL | tr ' ' '_' | sort | uniq)
 for taxa_curr_tmp in $(echo $taxa_tmp | tr ' ' '\n'); do
   taxa_curr=$(echo $taxa_curr_tmp | tr '_' ' ');
