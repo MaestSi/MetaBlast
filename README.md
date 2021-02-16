@@ -53,14 +53,14 @@ Then, you can open the **config_MetaBlast.sh** file with a text editor and set t
 **MetaBlast.sh**
 
 Usage:
-MetaBlast.sh -f \<fasta_reads\> -db \<blast_indexed_database\>
+MetaBlast.sh -f \<sample\_name.fasta\> -db \<blast_db\>
 
-Note: modify **config_MetaBlast** before running.
+Note: modify **config_MetaBlast.sh** before running.
 
 Inputs:
 
-* \<fasta_reads\>: fasta file containing reads to be analysed
-* \<blast_indexed_database\>: Blast-indexed database
+* \<sample\_name.fasta\>: fasta file containing reads to be analysed
+* \<blast_db\>: Blast-indexed database
 
 Outputs:
 * \<sample_name\>\_blast\_hits\_unique\_min\_id\_perc\_$MIN\_ID\_PERC\_min\_query\_cov\_$MIN\_QUERY\_COV.txt: file containing top Blast hit for each read
