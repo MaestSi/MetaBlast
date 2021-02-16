@@ -91,7 +91,7 @@ Note: script run by **MetaBlast.sh** to retrieve the full taxonomy for each top 
 
 Please refer to the following manuscripts for further information.
 
-O. Tange (2011): GNU Parallel - The Command-Line Power Tool;login: The USENIX Magazine, February 2011:42-47.
+Tange, O. (2020, September 22). GNU Parallel 20200922 ('Ginsburg'). Zenodo. https://doi.org/10.5281/zenodo.4045386
 
 Altschul, S.F., Gish, W., Miller, W., Myers, E.W. & Lipman, D.J. (1990) "Basic local alignment search tool." J. Mol. Biol. 215:403-410.
 
