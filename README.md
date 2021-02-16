@@ -57,7 +57,7 @@ Then, you can open the **config_MetaBlast.sh** file with a text editor and set t
 **MetaBlast.sh**
 
 Usage:
-MetaBlast.sh -f \<sample\_name.fasta\> -db \<blast_db\>
+./MetaBlast.sh -f \<sample\_name.fasta\> -db \<blast_db\>
 
 Note: modify **config_MetaBlast.sh** before running.
 
@@ -75,12 +75,15 @@ Outputs:
 In the following, auxiliary scripts run by **MetaBlast.sh** are listed. These scripts should not be called directly.
 
 **config_MetaBlast.sh**
+
 Note: configuration script, should be edited before running **MetaBlast.sh**.
 
 **Filter_Blast_hits.R**
+
 Note: script run by **MetaBlast.sh** for filtering Blast results, retaining up to 1 top hit for each read.
 
 **Retrieve_taxonomy.R**
+
 Note: script run by **MetaBlast.sh** for retrieve the full taxonomy for each top hit.
 
 
