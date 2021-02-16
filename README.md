@@ -49,3 +49,19 @@ A conda environment named _MetaBlast_env_ is created, where blast and R with pac
 Then, you can open the **config_MetaBlast.sh** file with a text editor and set the variables _PIPELINE_DIR_ and _MINICONDA_DIR_ to the value suggested by the installation step.
 
 ## Usage
+
+**MetaBlast.sh**
+
+Usage:
+MetaBlast.sh -f \<fasta_reads\> -db \<blast_indexed_database\>
+
+Note: modify **config_MetaBlast** before running.
+
+Inputs:
+
+* \<fasta_reads\>: fasta file containing reads to be analysed
+* \<blast_indexed_database\>: Blast-indexed database
+
+Outputs:
+* \<sample_name\>\_blast\_hits\_unique\_min\_id\_perc\_$MIN\_ID\_PERC\_min\_query\_cov\_$MIN\_QUERY\_COV.txt: file containing top Blast hit for each read
+* \<sample_name\>\_summary\_blast\_hits\_unique\_min\_id\_perc\_$MIN\_ID\_PERC\_min\_query\_cov\_$MIN\_QUERY\_COV.txt: file containing summary of top Blast hits with full taxonomy
