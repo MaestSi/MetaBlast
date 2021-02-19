@@ -34,7 +34,7 @@ for f in $targz_files; do tar -xzvf $f; done
 rm $targz_files
 ```
 
-Or, in case you want to use a custom \<fasta file\>, you can create a Blast-indexed database with the following instruction:
+Or, in case you want to use a custom \<fasta file\> downloaded from NCBI, you can create a Blast-indexed database with the following instruction:
 
 ```
 makeblastdb -in <fasta file> -parse_seqids -dbtype nucl
