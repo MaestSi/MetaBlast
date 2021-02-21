@@ -82,7 +82,7 @@ Inputs:
 
 Output
 
-* \<sample_name\>\_summary\_blast\_hits_merged_level\<taxonomic level\>.txt: summary file collapsed at the desired taxonomic level
+* \<sample_name\>\_summary\_blast\_hits_collapsed_level\<taxonomic level\>.txt: summary file collapsed at the desired taxonomic level
 
 ## Auxiliary scripts
 
