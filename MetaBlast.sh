@@ -91,5 +91,5 @@ done
 
 sed -i "1s/^/Read id\tGenbank id\tSubject description\tAlignment length (bp)\tAlignment identity perc.\tQuery coverage perc.\tE-value\tBitscore\n/" $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt"
 $RSCRIPT $PIPELINE_DIR"/Retrieve_taxonomy.R" $working_dir/$sample_name"_blast_hits_counts_no_taxonomy.txt" $working_dir/$sample_name"_summary_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt"
-tmp=$(find $working_dir -maxdepth 1 | grep -P $sample_name".chunk|_no_taxonomy|parallel_")
+tmp=$(find $working_dir -maxdepth 1 | grep -P $sample_name".chunk|"$sample_name".*_no_taxonomy|parallel_blast_"$sample_name"|parallel_filtering_"$sample_name)
 rm $tmp
