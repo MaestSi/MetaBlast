@@ -80,9 +80,9 @@ fil_chunks=$(find $working_dir -maxdepth 1 | grep $sample_name"\.chunk.*_blast_h
 cat $fil_chunks > $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt"
 cat $working_dir/$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | cut -f2 | cut -d' ' -f1 | sort | uniq -c | sort -nr > $working_dir/$sample_name"_blast_hits_counts_no_taxonomy_tmp.txt"
 for gb in $(rev $working_dir"/"$sample_name"_blast_hits_counts_no_taxonomy_tmp.txt" | cut -d' ' -f1 | rev); do
-  total=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep $gb | wc -l);
-  pid_tot=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep $gb | cut -f5 | paste -sd+ | bc);
-  qcov_tot=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep $gb | cut -f6 | paste -sd+ | bc);
+  total=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep -P "\t$gb\t" | wc -l);
+  pid_tot=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep -P "\t$gb\t" | cut -f5 | paste -sd+ | bc);
+  qcov_tot=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep -P "\t$gb\t" | cut -f6 | paste -sd+ | bc);
   pid=$(echo "scale=2;" $pid_tot / $total | bc);
   qcov=$(echo "scale=2;" $qcov_tot / $total | bc) ;
   nr=$(rev $working_dir"/"$sample_name"_blast_hits_counts_no_taxonomy_tmp.txt" | grep $(echo $gb | rev) | cut -d' ' -f2 | rev);
