@@ -85,8 +85,7 @@ for gb in $(rev $working_dir"/"$sample_name"_blast_hits_counts_no_taxonomy_tmp.t
   qcov_tot=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep -P "\t$gb\t" | cut -f6 | paste -sd+ | bc);
   pid=$(echo "scale=2;" $pid_tot / $total | bc);
   qcov=$(echo "scale=2;" $qcov_tot / $total | bc) ;
-  nr=$(rev $working_dir"/"$sample_name"_blast_hits_counts_no_taxonomy_tmp.txt" | grep $(echo $gb | rev) | cut -d' ' -f2 | rev);
-  echo -e $nr"\t"$gb"\t"$pid"\t"$qcov >> $working_dir"/"$sample_name"_blast_hits_counts_no_taxonomy.txt";
+  echo -e $total"\t"$gb"\t"$pid"\t"$qcov >> $working_dir"/"$sample_name"_blast_hits_counts_no_taxonomy.txt";
 done
 
 sed -i "1s/^/Read id\tGenbank id\tSubject description\tAlignment length (bp)\tAlignment identity perc.\tQuery coverage perc.\tE-value\tBitscore\n/" $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt"
