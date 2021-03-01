@@ -27,7 +27,8 @@ echo -e "Num. reads\tCollapsed taxa" > $OUTPUT_FILE
 taxa_tmp=$(cat $INPUT_FILE | tail -n+2 | cut -f $TAXA_COL | sed 's/ /___/g' | sort | uniq)
 for taxa_curr_tmp in $(echo $taxa_tmp | sed 's/ /\n/g'); do
   taxa_curr=$(echo $taxa_curr_tmp | sed 's/___/ /g');
-  total=$(cat $INPUT_FILE | grep -P "\t$taxa_curr\t" | cut -f1 | paste -sd+ | bc);
+  taxa_curr_mod=$(echo $taxa_curr | sed 's/[][]/\\&/g' | sed 's/[)(]/\\&/g');
+  total=$(cat $INPUT_FILE | grep -P "\t$taxa_curr_mod\t" | cut -f1 | paste -sd+ | bc);
   echo -e $total"\t"$taxa_curr"\t" >> $OUTPUT_FILE_TMP
 done
 cat $OUTPUT_FILE_TMP | sort -nr >> $OUTPUT_FILE
