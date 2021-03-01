@@ -22,10 +22,13 @@ INPUT_FILE=$1
 TAXA_COL=$2
 
 OUTPUT_FILE=$(echo $(basename $INPUT_FILE) | sed 's/\.txt/_collapsed/')"_level_"$TAXA_COL".txt"
+OUTPUT_FILE_TMP=$(echo $(basename $INPUT_FILE) | sed 's/\.txt/_collapsed/')"_level_"$TAXA_COL"_tmp.txt"
 echo -e "Num. reads\tCollapsed taxa" > $OUTPUT_FILE
-taxa_tmp=$(cat $INPUT_FILE | tail -n+2 | cut -f $TAXA_COL | tr ' ' '_' | sort | uniq)
-for taxa_curr_tmp in $(echo $taxa_tmp | tr ' ' '\n'); do
-  taxa_curr=$(echo $taxa_curr_tmp | tr '_' ' ');
-  nr=$(cat $INPUT_FILE | grep "$taxa_curr" | cut -f1 | paste -sd+ | bc);
-  echo -e $nr"\t"$taxa_curr"\t" >> $OUTPUT_FILE
+taxa_tmp=$(cat $INPUT_FILE | tail -n+2 | cut -f $TAXA_COL | sed 's/ /___/g' | sort | uniq)
+for taxa_curr_tmp in $(echo $taxa_tmp | sed 's/ /\n/g'); do
+  taxa_curr=$(echo $taxa_curr_tmp | sed 's/___/ /g');
+  total=$(cat $INPUT_FILE | grep -P "\t$taxa_curr\t" | cut -f1 | paste -sd+ | bc);
+  echo -e $total"\t"$taxa_curr"\t" >> $OUTPUT_FILE_TMP
 done
+cat $OUTPUT_FILE_TMP | sort -nr >> $OUTPUT_FILE
+rm $OUTPUT_FILE_TMP
