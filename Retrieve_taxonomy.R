@@ -26,11 +26,12 @@ if (length(args) == 2) {
 }
 
 library("taxize")
-taxonomy_assignments <- read.table(input_file, stringsAsFactors = FALSE)
+taxonomy_assignments <- read.table(input_file, stringsAsFactors = FALSE, sep = "\t")
 counts <- taxonomy_assignments[, 1]
 genbank_ids <- taxonomy_assignments[, 2]
-avg_alignment_identity <- taxonomy_assignments[, 3]
-avg_query_cov <- taxonomy_assignments[, 4]
+subject_description <- taxonomy_assignments[, 3]
+avg_alignment_identity <- taxonomy_assignments[, 4]
+avg_query_cov <- taxonomy_assignments[, 5]
 full_taxonomy <- c()
 
 taxid <- genbank2uid(id = genbank_ids)
@@ -50,13 +51,13 @@ for (i in 1:length(raw_classification)) {
       kingdom_name_curr <- raw_classification[[i]][which(raw_classification[[i]][, 2] == "superkingdom"), 1]
       full_taxonomy[i] <- paste(kingdom_name_curr, phylum_name_curr, class_name_curr, order_name_curr, family_name_curr, genus_name_curr, species_name_curr, subspecies_name_curr, sep = "\t")
     } else {
-      full_taxonomy[i] <- "Unclassified"
+      full_taxonomy[i] <- "Unclassified\t\t\t\t\t\t\t"
       }
   } else {
-    full_taxonomy[i] <- "Unclassified"
+    full_taxonomy[i] <- "Unclassified\t\t\t\t\t\t\t"
   }
 }
 
-full_taxonomy_df <- data.frame(counts, full_taxonomy, avg_alignment_identity, avg_query_cov)
-names(full_taxonomy_df) <- c("Read Counts", "Kingdom\tPhylum\tClass\tOrder\tFamily\tGenus\tSpecies\tSubspecies", "Average alignment identity perc.", "Average query coverage perc.")
+full_taxonomy_df <- data.frame(counts, subject_description, full_taxonomy, avg_alignment_identity, avg_query_cov)
+names(full_taxonomy_df) <- c("Read Counts", "Full description",  "Kingdom\tPhylum\tClass\tOrder\tFamily\tGenus\tSpecies\tSubspecies", "Average alignment identity perc.", "Average query coverage perc.")
 write.table(x = full_taxonomy_df, file = output_file, quote = FALSE, sep = "\t", row.names = FALSE, col.names = TRUE)
