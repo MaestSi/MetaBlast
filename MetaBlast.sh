@@ -58,6 +58,7 @@ done
 
 
 blast_threads=1
+filtering_threads=$(echo $threads/4 | bc)
 #makeblastdb -in $2 -parse_seqids -dbtype nucl
 sample_name_tmp=$(basename "$fasta_reads")
 sample_name="${sample_name_tmp%.*}"
@@ -74,7 +75,7 @@ parallel -j $threads < $parallel_blast
 for f in $(find $working_dir -maxdepth 1 | grep $sample_name".chunk.*_blast_hits.txt"); do
   echo "$RSCRIPT $PIPELINE_DIR/Filter_Blast_hits.R $f $min_query_cov $min_id_perc" >> $parallel_filtering
 done
-parallel -j $threads < $parallel_filtering
+parallel -j $filtering_threads < $parallel_filtering
 
 fil_chunks=$(find $working_dir -maxdepth 1 | grep $sample_name"\.chunk.*_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov"\.txt")
 cat $fil_chunks > $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt"
