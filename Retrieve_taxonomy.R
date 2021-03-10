@@ -28,14 +28,12 @@ if (length(args) == 2) {
 library("taxize")
 taxonomy_assignments <- read.table(input_file, stringsAsFactors = FALSE, sep = "\t")
 counts <- taxonomy_assignments[, 1]
-genbank_ids <- taxonomy_assignments[, 2]
+taxid <- taxonomy_assignments[, 2]
 subject_description <- taxonomy_assignments[, 3]
 avg_alignment_identity <- taxonomy_assignments[, 4]
 avg_query_cov <- taxonomy_assignments[, 5]
 full_taxonomy <- c()
 
-taxid <- genbank2uid(id = genbank_ids)
-#taxid <- as.numeric(genbank_ids) #EPI1ME 16S workflow already provides the NCBI taxid
 raw_classification <- classification(taxid, db = 'ncbi')
 
 for (i in 1:length(raw_classification)) {

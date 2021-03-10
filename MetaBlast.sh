@@ -68,7 +68,7 @@ parallel_blast=$working_dir"/parallel_blast_"$sample_name".sh"
 parallel_filtering=$working_dir"/parallel_filtering_"$sample_name".sh"
 
 for f in $(find $working_dir -maxdepth 1 | grep $sample_name".chunk"); do
-  echo "$BLAST -db $blast_db -query $f -num_threads $blast_threads -outfmt \"6 qseqid sgi salltitles length pident qcovhsp evalue bitscore\" -evalue $max_evalue > $working_dir"/"$(basename $f)_blast_hits.txt" >> $parallel_blast
+  echo "$BLAST -db $blast_db -query $f -num_threads $blast_threads -outfmt \"6 qseqid staxid salltitles length pident qcovhsp evalue bitscore\" -evalue $max_evalue > $working_dir"/"$(basename $f)_blast_hits.txt" >> $parallel_blast
 done
 parallel -j $threads < $parallel_blast
 
@@ -90,7 +90,7 @@ for gb in $(rev $working_dir"/"$sample_name"_blast_hits_counts_no_taxonomy_tmp.t
   echo -e $total"\t"$gb"\t"$desc"\t"$pid"\t"$qcov >> $working_dir"/"$sample_name"_blast_hits_counts_no_taxonomy.txt";
 done
 
-sed -i "1s/^/Read id\tGenbank id\tSubject description\tAlignment length (bp)\tAlignment identity perc.\tQuery coverage perc.\tE-value\tBitscore\n/" $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt"
+sed -i "1s/^/Read id\tTaxonomy id\tSubject description\tAlignment length (bp)\tAlignment identity perc.\tQuery coverage perc.\tE-value\tBitscore\n/" $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt"
 $RSCRIPT $PIPELINE_DIR"/Retrieve_taxonomy.R" $working_dir/$sample_name"_blast_hits_counts_no_taxonomy.txt" $working_dir/$sample_name"_summary_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt"
 tmp=$(find $working_dir -maxdepth 1 | grep -P $sample_name".chunk|"$sample_name".*_no_taxonomy|parallel_blast_"$sample_name"|parallel_filtering_"$sample_name)
 rm $tmp
