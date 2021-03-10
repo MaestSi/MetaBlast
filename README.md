@@ -37,7 +37,10 @@ rm $targz_files
 Or, in case you want to use a custom \<fasta file\> downloaded from NCBI, you can create a Blast-indexed database with the following instruction:
 
 ```
-makeblastdb -in <fasta file> -parse_seqids -dbtype nucl
+wget ftp://ftp.ncbi.nlm.nih.gov/pub/taxonomy/accession2taxid/nucl_gb.accession2taxid.gz
+gunzip nucl_gb.accession2taxid.gz
+tail -n+2 nucl_gb.accession2taxid | cut -f2,3 > Taxid_map.txt
+makeblastdb -in <fasta file> -parse_seqids -dbtype nucl -taxid_map Taxid_map.txt
 ```
 
 **Installation**
