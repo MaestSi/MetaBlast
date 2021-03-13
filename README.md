@@ -62,7 +62,11 @@ Then, you can open the **config_MetaBlast.sh** file with a text editor and set t
 Usage:
 ./MetaBlast.sh -f \<sample\_name.fasta\> -db \<blast_db\>
 
-Note: modify **config_MetaBlast.sh** before running
+Note: modify **config_MetaBlast.sh** before running; be sure your fasta file has 2 lines per sequence.
+If you need reformatting it do:
+```
+seqtk seq -A <sample_name_tmp.fasta> > <sample_name.fasta>
+```
 
 Inputs:
 
