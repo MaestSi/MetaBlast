@@ -26,7 +26,7 @@ if (length(args) == 2) {
 }
 
 library("taxize")
-taxonomy_assignments <- read.table(input_file, stringsAsFactors = FALSE, sep = "\t")
+taxonomy_assignments <- read.table(input_file, stringsAsFactors = FALSE, sep = "\t", quote = "", comment.char = "")
 counts <- taxonomy_assignments[, 1]
 taxid <- taxonomy_assignments[, 2]
 subject_description <- taxonomy_assignments[, 3]
