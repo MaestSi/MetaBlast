@@ -43,6 +43,13 @@ tail -n+2 nucl_gb.accession2taxid | cut -f2,3 > Taxid_map.txt
 makeblastdb -in <fasta file> -parse_seqids -dbtype nucl -taxid_map Taxid_map.txt
 ```
 
+* A fasta file containing sequences you want to Blast. Be sure your fasta file has 2 lines for each sequence.
+If you need reformatting it do:
+
+```
+seqtk seq -A <sample_name_tmp.fasta> > <sample_name.fasta>
+```
+
 **Installation**
 
 ```
@@ -62,11 +69,7 @@ Then, you can open the **config_MetaBlast.sh** file with a text editor and set t
 Usage:
 ./MetaBlast.sh -f \<sample\_name.fasta\> -db \<blast_db\>
 
-Note: modify **config_MetaBlast.sh** before running; be sure your fasta file has 2 lines per sequence.
-If you need reformatting it do:
-```
-seqtk seq -A <sample_name_tmp.fasta> > <sample_name.fasta>
-```
+Note: modify **config_MetaBlast.sh** before running; 
 
 Inputs:
 
