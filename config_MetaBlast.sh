@@ -27,7 +27,7 @@ max_evalue=0.00001
 #number of threads
 threads=24
 #chunk_size is the number of rows contained in each split fasta file
-chunk_size=100
+chunk_size=10000
 ########################################################################################################
 PIPELINE_DIR="/path/to/MetaBlast"
 MINICONDA_DIR="/path/to/miniconda3"
