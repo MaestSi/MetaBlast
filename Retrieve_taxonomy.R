@@ -28,7 +28,7 @@ if (length(args) == 2) {
 library("taxize")
 taxonomy_assignments <- read.table(input_file, stringsAsFactors = FALSE, sep = "\t", quote = "", comment.char = "")
 counts <- taxonomy_assignments[, 1]
-taxid <- taxonomy_assignments[, 2]
+taxid <- as.numeric(taxonomy_assignments[, 2])
 subject_description <- taxonomy_assignments[, 3]
 avg_alignment_identity <- taxonomy_assignments[, 4]
 avg_query_cov <- taxonomy_assignments[, 5]

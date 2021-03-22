@@ -59,7 +59,6 @@ done
 
 blast_threads=1
 filtering_threads=$(echo $threads/4 | bc)
-#makeblastdb -in $2 -parse_seqids -dbtype nucl
 sample_name_tmp=$(basename "$fasta_reads")
 sample_name="${sample_name_tmp%.*}"
 working_dir=$(dirname "$fasta_reads")
@@ -80,14 +79,15 @@ parallel -j $filtering_threads < $parallel_filtering
 fil_chunks=$(find $working_dir -maxdepth 1 | grep $sample_name"\.chunk.*_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov"\.txt")
 cat $fil_chunks > $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt"
 cat $working_dir/$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | cut -f2,3 | sort | uniq -c | sort -nr > $working_dir/$sample_name"_blast_hits_counts_no_taxonomy_tmp.txt"
-for gb in $(rev $working_dir"/"$sample_name"_blast_hits_counts_no_taxonomy_tmp.txt" | cut -f2 | cut -d' ' -f1 | rev); do
-  desc=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep -P "\t$gb\t" | cut -f3 | uniq)
-  total=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep -P "\t$gb\t" | wc -l);
-  pid_tot=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep -P "\t$gb\t" | cut -f5 | paste -sd+ | bc);
-  qcov_tot=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep -P "\t$gb\t" | cut -f6 | paste -sd+ | bc);
+
+cat $working_dir"/"$sample_name"_blast_hits_counts_no_taxonomy_tmp.txt" | cut -f2 | while read desc; do
+  taxid=$(cat $working_dir"/"$sample_name"_blast_hits_counts_no_taxonomy_tmp.txt" | grep "$desc" | rev | cut -f2 | cut -d' ' -f1 | rev);
+  total=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep "$desc" | wc -l);
+  pid_tot=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep "$desc" | cut -f5 | paste -sd+ | bc);
+  qcov_tot=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep "$desc" | cut -f6 | paste -sd+ | bc);
   pid=$(echo "scale=2;" $pid_tot / $total | bc);
   qcov=$(echo "scale=2;" $qcov_tot / $total | bc) ;
-  echo -e $total"\t"$gb"\t"$desc"\t"$pid"\t"$qcov >> $working_dir"/"$sample_name"_blast_hits_counts_no_taxonomy.txt";
+  echo -e $total"\t"$taxid"\t"$desc"\t"$pid"\t"$qcov >> $working_dir"/"$sample_name"_blast_hits_counts_no_taxonomy.txt";
 done
 
 sed -i "1s/^/Read id\tTaxonomy id\tSubject description\tAlignment length (bp)\tAlignment identity perc.\tQuery coverage perc.\tE-value\tBitscore\n/" $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt"
