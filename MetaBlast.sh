@@ -64,7 +64,7 @@ split -l $chunk_size -d $fasta_reads $sample_name".chunk"
 parallel_blast=$working_dir"/parallel_blast_"$sample_name".sh"
 parallel_filtering=$working_dir"/parallel_filtering_"$sample_name".sh"
 num_chunks=$(find $working_dir | grep $sample_name".chunk" | wc -l)
-blast_threads=$(echo $threads/$num_chunks | bc)
+divide=$threads; by=$num_chunks; (( blast_threads=(divide+by-1)/by ))
 
 for f in $(find $working_dir -maxdepth 1 | grep $sample_name".chunk"); do
   echo "$BLAST -db $blast_db -query $f -num_threads $blast_threads -outfmt \"6 qseqid staxid salltitles length pident qcovhsp evalue bitscore\" -evalue $max_evalue > $working_dir"/"$(basename $f)_blast_hits.txt" >> $parallel_blast
