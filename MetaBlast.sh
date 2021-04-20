@@ -56,8 +56,6 @@ do
     esac
 done
 
-
-blast_threads=1
 filtering_threads=$(echo $threads/4 | bc)
 sample_name_tmp=$(basename "$fasta_reads")
 sample_name="${sample_name_tmp%.*}"
@@ -65,6 +63,8 @@ working_dir=$(dirname "$fasta_reads")
 split -l $chunk_size -d $fasta_reads $sample_name".chunk"
 parallel_blast=$working_dir"/parallel_blast_"$sample_name".sh"
 parallel_filtering=$working_dir"/parallel_filtering_"$sample_name".sh"
+num_chunks=$(find $working_dir | grep $sample_name".chunk" | wc -l)
+blast_threads=$(echo $threads/$num_chunks | bc)
 
 for f in $(find $working_dir -maxdepth 1 | grep $sample_name".chunk"); do
   echo "$BLAST -db $blast_db -query $f -num_threads $blast_threads -outfmt \"6 qseqid staxid salltitles length pident qcovhsp evalue bitscore\" -evalue $max_evalue > $working_dir"/"$(basename $f)_blast_hits.txt" >> $parallel_blast
