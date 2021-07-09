@@ -81,7 +81,7 @@ cat $fil_chunks > $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$m
 cat $working_dir/$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | cut -f2,3 | sort | uniq -c | sort -nr > $working_dir/$sample_name"_blast_hits_counts_no_taxonomy_tmp.txt"
 
 cat $working_dir"/"$sample_name"_blast_hits_counts_no_taxonomy_tmp.txt" | cut -f2 | while read desc; do
-  taxid=$(cat $working_dir"/"$sample_name"_blast_hits_counts_no_taxonomy_tmp.txt" | grep "$desc" | rev | cut -f2 | cut -d' ' -f1 | rev);
+  taxid=$(cat $working_dir"/"$sample_name"_blast_hits_counts_no_taxonomy_tmp.txt" | grep -F "$desc" | rev | cut -f2 | cut -d' ' -f1 | rev);
   total=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep -F "$desc" | wc -l);
   pid_tot=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep -F "$desc" | cut -f5 | paste -sd+ | bc);
   qcov_tot=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep -F "$desc" | cut -f6 | paste -sd+ | bc);
