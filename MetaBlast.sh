@@ -80,11 +80,12 @@ fil_chunks=$(find $working_dir -maxdepth 1 | grep $sample_name"\.chunk.*_blast_h
 cat $fil_chunks > $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt"
 cat $working_dir/$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | cut -f2,3 | sort | uniq -c | sort -nr > $working_dir/$sample_name"_blast_hits_counts_no_taxonomy_tmp.txt"
 
+tab=$(echo -e '\t')
 cat $working_dir"/"$sample_name"_blast_hits_counts_no_taxonomy_tmp.txt" | cut -f2 | while read desc; do
-  taxid=$(cat $working_dir"/"$sample_name"_blast_hits_counts_no_taxonomy_tmp.txt" | grep -F "$desc" | rev | cut -f2 | cut -d' ' -f1 | rev);
-  total=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep -F "$desc" | wc -l);
-  pid_tot=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep -F "$desc" | cut -f5 | paste -sd+ | bc);
-  qcov_tot=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep -F "$desc" | cut -f6 | paste -sd+ | bc);
+  taxid=$(cat $working_dir"/"$sample_name"_blast_hits_counts_no_taxonomy_tmp.txt" | grep -F "${tab}$desc" | rev | cut -f2 | cut -d' ' -f1 | rev | head -n1);
+  total=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep -F "${tab}$desc${tab}" | wc -l);
+  pid_tot=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep -F "${tab}$desc${tab}" | cut -f5 | paste -sd+ | bc);
+  qcov_tot=$(cat $working_dir"/"$sample_name"_blast_hits_unique_min_id_perc_"$min_id_perc"_min_query_cov_"$min_query_cov".txt" | grep -F "${tab}$desc${tab}" | cut -f6 | paste -sd+ | bc);
   pid=$(echo "scale=2;" $pid_tot / $total | bc);
   qcov=$(echo "scale=2;" $qcov_tot / $total | bc) ;
   echo -e $total"\t"$taxid"\t"$desc"\t"$pid"\t"$qcov >> $working_dir"/"$sample_name"_blast_hits_counts_no_taxonomy.txt";
