@@ -113,9 +113,11 @@ Note: script run by **MetaBlast.sh** to retrieve the full taxonomy for each top 
 
 ## Citations
 
-If this tool is useful for your work, please consider citing our [manuscript](https://www.mdpi.com/2076-0817/11/2/199).
+If this tool is useful for your work, please consider citing our [manu](https://www.mdpi.com/2076-0817/11/2/199)[scripts](https://www.mdpi.com/2223-7747/11/6/779).
 
 Marcolungo L, Passera A, Maestri S, Segala E, Alfano M, Gaffuri F, Marturano G, Casati P, Bianco PA, Delledonne M. Real-Time On-Site Diagnosis of Quarantine Pathogens in Plant Tissues by Nanopore-Based Sequencing. Pathogens. 2022; 11(2):199. https://doi.org/10.3390/pathogens11020199.
+
+Tarquini G, Martini M, Maestri S, Firrao G, Ermacora P. The Virome of ‘Lamon Bean’: Application of MinION Sequencing to Investigate the Virus Population Associated with Symptomatic Beans in the Lamon Area, Italy. Plants. 2022; 11(6):779. https://doi.org/10.3390/plants11060779
 
 Please refer to the following manuscripts for further information.
 
