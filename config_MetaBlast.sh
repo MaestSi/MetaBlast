@@ -34,4 +34,5 @@ MINICONDA_DIR="/path/to/miniconda3"
 ########### End of user editable region #################################################################
 RSCRIPT=$MINICONDA_DIR"/envs/MetaBlast_env/bin/Rscript"
 BLAST=$MINICONDA_DIR"/envs/MetaBlast_env/bin/blastn"
+KRONA=$MINICONDA_DIR"/envs/MetaBlast_env/bin/ktImportTaxonomy"
 
