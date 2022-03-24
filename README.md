@@ -59,7 +59,7 @@ chmod 755 *
 ./install.sh
 ```
 
-A conda environment named _MetaBlast_env_ is created, where blast, parallel and R with packages taxize and data.table are installed.
+A conda environment named _MetaBlast_env_ is created, where blast, krona, parallel and R with packages taxize and data.table are installed.
 Then, you can open the **config_MetaBlast.sh** file with a text editor and set the variables _PIPELINE_DIR_ and _MINICONDA_DIR_ to the value suggested by the installation step.
 
 ## Usage
