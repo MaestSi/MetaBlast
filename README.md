@@ -110,6 +110,14 @@ Note: script run by **MetaBlast.sh** for filtering Blast results, retaining up t
 
 Note: script run by **MetaBlast.sh** to retrieve the full taxonomy for each top hit.
 
+## Results visualization
+
+After completing the analysis, you can open \<sample_name\>\_blast\_hits\_unique\_min\_id\_perc\_$MIN\_ID\_PERC\_min\_query\_cov\_$MIN\_QUERY\_COV\_Krona\_report.html with a browser.
+
+<p align="center">
+  <img src="Figures/Krona_report_example.png" alt="drawing" width="30000" title="Krona report example">
+</p>
+
 
 ## Citations
 
