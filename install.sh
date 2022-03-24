@@ -24,7 +24,9 @@ conda config --add channels bioconda
 conda config --add channels conda-forge
 conda config --add channels r
 conda config --add channels anaconda
-conda create -n MetaBlast_env blast parallel r-base r-taxize r-data.table
+conda create -n MetaBlast_env blast krona parallel r-base r-taxize r-data.table
+$MINICONDA_DIR"/envs/MetaBlast_env/bin/ktUpdateTaxonomy.sh"
+
 echo -e "\n"
 echo "Modify variables PIPELINE_DIR and MINICONDA_DIR in config_MetaBlast.sh"
 echo -e "PIPELINE_DIR=\"$PIPELINE_DIR\""
