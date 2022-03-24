@@ -1,1 +1,1 @@
-MetaBlast-v1.1.0
+MetaBlast-v1.2.0
