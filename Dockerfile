@@ -39,6 +39,5 @@ RUN conda create -n MetaBlast_env blast krona parallel
 RUN conda install -n MetaBlast_env r-base r-taxize r-data.table
 RUN MINICONDA_DIR=$(which conda | sed 's/miniconda3.*$/miniconda3/')
 RUN /opt/conda/envs/MetaBlast_env/bin/ktUpdateTaxonomy.sh
-#&& ./install.sh
 
 WORKDIR /home/
