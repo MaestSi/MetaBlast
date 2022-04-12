@@ -25,7 +25,7 @@ conda config --add channels conda-forge
 conda config --add channels r
 conda config --add channels anaconda
 
-conda create -n MetaBlast_env r-base
+conda create -n MetaBlast_env r-base=4.0
 conda install -n MetaBlast_env r-taxize r-data.table
 conda install -n MetaBlast_env blast=2.12 krona parallel
 $MINICONDA_DIR"/envs/MetaBlast_env/bin/ktUpdateTaxonomy.sh"
