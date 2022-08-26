@@ -17,6 +17,7 @@ RUN apt-get update -qq \
     libidn11* \
     nano \
     curl \
+    bc \
     python3.6 \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
@@ -33,12 +34,12 @@ conda config --add channels conda-forge && \
 conda config --add channels r && \
 conda config --add channels anaconda
 
-RUN sed -i 's/PIPELINE_DIR=.*/PIPELINE_DIR <- \"\/home\/tools\/MetaBlast\/\"/' config_MetaBlast.sh
-RUN sed -i 's/MINICONDA_DIR=.*/MINICONDA_DIR <- \"\/opt\/conda\/\"/' config_MetaBlast.sh
+RUN sed -i 's/PIPELINE_DIR=.*/PIPELINE_DIR=\"\/home\/tools\/MetaBlast\/\"/' config_MetaBlast.sh
+RUN sed -i 's/MINICONDA_DIR=.*/MINICONDA_DIR=\"\/opt\/conda\/\"/' config_MetaBlast.sh
 
 RUN conda create -n MetaBlast_env r-base
 RUN conda install -n MetaBlast_env r-taxize r-data.table
-RUN conda install -n MetaBlast_env blast krona parallel
+RUN conda install -n MetaBlast_env blast=2.12 krona parallel
 
 RUN MINICONDA_DIR=$(which conda | sed 's/miniconda3.*$/miniconda3/')
 RUN /opt/conda/envs/MetaBlast_env/bin/ktUpdateTaxonomy.sh
