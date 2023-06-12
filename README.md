@@ -30,8 +30,7 @@ cd NCBI_nt_db
 echo `date +%Y-%m-%d` > download_date.txt
 wget ftp://ftp.ncbi.nlm.nih.gov/blast/db/nt*
 targz_files=$(find . | grep \.tar\.gz$ | sed 's/\.\///g')
-for f in $targz_files; do tar -xzvf $f; done
-rm $targz_files
+for f in $targz_files; do tar -xzvf $f; rm $f; done
 ```
 
 Or, in case you want to use a custom \<fasta file\> downloaded from NCBI, you can create a Blast-indexed database with the following instruction:
