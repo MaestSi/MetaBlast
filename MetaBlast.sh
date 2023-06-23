@@ -60,6 +60,7 @@ filtering_threads=$(echo $threads/4 | bc)
 sample_name_tmp=$(basename "$fasta_reads")
 sample_name="${sample_name_tmp%.*}"
 working_dir=$(dirname "$fasta_reads")
+cd $working_dir
 split -l $chunk_size -d $fasta_reads $sample_name".chunk"
 parallel_blast=$working_dir"/parallel_blast_"$sample_name".sh"
 parallel_filtering=$working_dir"/parallel_filtering_"$sample_name".sh"
