@@ -66,12 +66,12 @@ for (i in 1:length(raw_classification)) {
       class_name_curr <- raw_classification[[i]][which(raw_classification[[i]][, 2] == "class"), 1]
       phylum_name_curr <- raw_classification[[i]][which(raw_classification[[i]][, 2] == "phylum"), 1]
       kingdom_name_curr <- raw_classification[[i]][which(raw_classification[[i]][, 2] == "superkingdom"), 1]
-      full_taxonomy[i] <- paste(kingdom_name_curr, phylum_name_curr, class_name_curr, order_name_curr, family_name_curr, genus_name_curr, species_name_curr, subspecies_name_curr, sep = ";")
+      full_taxonomy[i] <- paste(kingdom_name_curr, phylum_name_curr, class_name_curr, order_name_curr, family_name_curr, genus_name_curr, species_name_curr, subspecies_name_curr, sep = "\t")
     } else {
-      full_taxonomy[i] <- "Unclassified;;;;;;;"
+      full_taxonomy[i] <- "Unclassified\t\t\t\t\t\t\t"
     }
   } else {
-    full_taxonomy[i] <- "Unclassified;;;;;;;"
+    full_taxonomy[i] <- "Unclassified\t\t\t\t\t\t\t"
   }
 }
 
