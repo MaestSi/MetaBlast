@@ -34,8 +34,27 @@ avg_alignment_identity <- taxonomy_assignments[, 4]
 avg_query_cov <- taxonomy_assignments[, 5]
 full_taxonomy <- c()
 
-raw_classification <- classification(taxid, db = 'ncbi')
+max_attempts <- 10
+num_taxids_chunk <- 100
+if (length(taxid) < num_taxids_chunk) {
+  chunks_list <- list(1:length(taxid))
+} else {
+  chunks_list <- split(1:length(taxid), ceiling(seq(from = 1, to = length(taxid))/num_taxids_chunk))
+}
 
+raw_classification <- c()
+for (i in 1:length(chunks_list)) {
+  raw_classification_curr <- NULL
+  attempt <- 1
+  while(length(which(!is.na(raw_classification_curr))) != lapply(chunks_list, length)[[i]] && attempt <= max_attempts) {
+    raw_classification_curr <- try(suppressMessages(classification(NCBI_taxa_uids[chunks_list[[i]]], db = 'ncbi')))
+    if (attempt > 1)  cat(sprintf("Running attempt %d\n", attempt))
+    attempt <- attempt + 1
+  }
+}
+raw_classification <- c(raw_classification, raw_classification_curr)
+
+full_taxonomy <- c()
 for (i in 1:length(raw_classification)) {
   if (!is.null(ncol(raw_classification[[i]]))) {
     if (nrow(raw_classification[[i]]) > 1) {
@@ -47,12 +66,12 @@ for (i in 1:length(raw_classification)) {
       class_name_curr <- raw_classification[[i]][which(raw_classification[[i]][, 2] == "class"), 1]
       phylum_name_curr <- raw_classification[[i]][which(raw_classification[[i]][, 2] == "phylum"), 1]
       kingdom_name_curr <- raw_classification[[i]][which(raw_classification[[i]][, 2] == "superkingdom"), 1]
-      full_taxonomy[i] <- paste(kingdom_name_curr, phylum_name_curr, class_name_curr, order_name_curr, family_name_curr, genus_name_curr, species_name_curr, subspecies_name_curr, sep = "\t")
+      full_taxonomy[i] <- paste(kingdom_name_curr, phylum_name_curr, class_name_curr, order_name_curr, family_name_curr, genus_name_curr, species_name_curr, subspecies_name_curr, sep = ";")
     } else {
-      full_taxonomy[i] <- "Unclassified\t\t\t\t\t\t\t"
-      }
+      full_taxonomy[i] <- "Unclassified;;;;;;;"
+    }
   } else {
-    full_taxonomy[i] <- "Unclassified\t\t\t\t\t\t\t"
+    full_taxonomy[i] <- "Unclassified;;;;;;;"
   }
 }
 
