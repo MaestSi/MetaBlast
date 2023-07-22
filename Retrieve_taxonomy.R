@@ -47,7 +47,7 @@ for (i in 1:length(chunks_list)) {
   raw_classification_curr <- NULL
   attempt <- 1
   while(length(which(!is.na(raw_classification_curr))) != lapply(chunks_list, length)[[i]] && attempt <= max_attempts) {
-    raw_classification_curr <- try(suppressMessages(classification(NCBI_taxa_uids[chunks_list[[i]]], db = 'ncbi')))
+    raw_classification_curr <- try(suppressMessages(classification(taxid[chunks_list[[i]]], db = 'ncbi')))
     if (attempt > 1)  cat(sprintf("Running attempt %d\n", attempt))
     attempt <- attempt + 1
   }
