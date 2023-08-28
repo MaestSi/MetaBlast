@@ -51,8 +51,8 @@ for (i in 1:length(chunks_list)) {
     if (attempt > 1)  cat(sprintf("Running attempt %d\n", attempt))
     attempt <- attempt + 1
   }
+  raw_classification <- c(raw_classification, raw_classification_curr)
 }
-raw_classification <- c(raw_classification, raw_classification_curr)
 
 full_taxonomy <- c()
 for (i in 1:length(raw_classification)) {
