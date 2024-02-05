@@ -132,6 +132,8 @@ Marcolungo L, Passera A, Maestri S, Segala E, Alfano M, Gaffuri F, Marturano G, 
 
 Tarquini G, Martini M, Maestri S, Firrao G, Ermacora P. The Virome of ‘Lamon Bean’: Application of MinION Sequencing to Investigate the Virus Population Associated with Symptomatic Beans in the Lamon Area, Italy. Plants. 2022; 11(6):779. https://doi.org/10.3390/plants11060779
 
+Tarquini G, Maestri S, Ermacora P, Martini M. The Oxford Nanopore MinION as a Versatile Technology for the Diagnosis and Characterization of Emerging Plant Viruses. Methods Mol Biol. 2024;2732:235-249. doi:10.1007/978-1-0716-3515-5_16
+
 Please refer to the following manuscripts for further information.
 
 Tange, O. (2020, September 22). GNU Parallel 20200922 ('Ginsburg'). Zenodo. https://doi.org/10.5281/zenodo.4045386
